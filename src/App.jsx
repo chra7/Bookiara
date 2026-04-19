@@ -134,7 +134,7 @@ style={{ flex: 1, padding: “8px”, borderRadius: 10, border: “none”, curs
 <Input label="Mot de passe" value={password} onChange={setPassword} type="password" placeholder="••••••••" />
 {error && <div style={{ background: “#FFF0F0”, border: “1px solid #FFB7B7”, borderRadius: 10, padding: “10px 14px”, fontSize: 13, color: “#C0392B”, marginBottom: 14 }}>⚠️ {error}</div>}
 {success && <div style={{ background: “#F0FFF4”, border: “1px solid #A8E6CF”, borderRadius: 10, padding: “10px 14px”, fontSize: 13, color: “#2D7A6B”, marginBottom: 14 }}>✅ {success}</div>}
-<PinkButton onClick={handleSubmit} disabled={loading}>{loading ? “Chargement…” : mode === “login” ? “Se connecter ✨” : “Créer mon compte 🌸”}</PinkButton>
+<PinkButton onClick={handleSubmit} disabled={loading}>{loading ? “Chargement. . .” : mode === “login” ? “Se connecter ✨” : “Créer mon compte 🌸”}</PinkButton>
 </div>
 </div>
 </div>
@@ -221,7 +221,7 @@ if (!form.article || !form.soldPrice || !form.buyPrice) return;
 const sold = parseFloat(form.soldPrice), bought = parseFloat(form.buyPrice);
 const profit = sold - bought, partners = parseInt(form.partners) || partnerCount;
 const { data } = await supabase.from(“sales”).insert({ user_id: userId, article: form.article, sold_price: sold, buy_price: bought, profit, partners, per_person: profit/partners, date: form.date }).select().single();
-if (data) setSales(p => [data, …p]);
+if (data) setSales(p => [data, . . .p]);
 triggerSticker();
 setModal(false);
 setForm({ article: “”, soldPrice: “”, buyPrice: “”, date: new Date().toISOString().slice(0,10), partners: “” });
@@ -253,7 +253,7 @@ return (
 <h3 style={{ margin: 0, fontFamily: “‘Playfair Display’, serif”, color: PASTEL.roseDeep, fontSize: 16 }}>Mes ventes</h3>
 <PinkButton onClick={() => setModal(true)} small>+ Ajouter une vente</PinkButton>
 </div>
-{loading && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight }}>Chargement… 🌸</div>}
+{loading && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight }}>Chargement. . . 🌸</div>}
 {!loading && sales.length === 0 && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight, fontSize: 13 }}>🌸 Aucune vente pour l’instant !</div>}
 <div style={{ display: “flex”, flexDirection: “column”, gap: 10 }}>
 {sales.map(s => (
@@ -272,11 +272,11 @@ return (
 </div>
 {modal && (
 <Modal title=“🛍️ Nouvelle vente” onClose={() => setModal(false)}>
-<Input label=“Article vendu” value={form.article} onChange={v => setForm(p=>({…p,article:v}))} placeholder=“ex: Sac Longchamp” />
-<Input label=“Prix de vente (€)” value={form.soldPrice} onChange={v => setForm(p=>({…p,soldPrice:v}))} type=“number” placeholder=“0” />
-<Input label=“Prix d’achat (€)” value={form.buyPrice} onChange={v => setForm(p=>({…p,buyPrice:v}))} type=“number” placeholder=“0” />
-<Input label=“Date” value={form.date} onChange={v => setForm(p=>({…p,date:v}))} type=“date” />
-<Input label=“Nombre de personnes” value={form.partners} onChange={v => setForm(p=>({…p,partners:v}))} type=“number” placeholder={`${partnerCount} (défaut)`} />
+<Input label=“Article vendu” value={form.article} onChange={v => setForm(p=>({. . .p,article:v}))} placeholder=“ex: Sac Longchamp” />
+<Input label=“Prix de vente (€)” value={form.soldPrice} onChange={v => setForm(p=>({. . .p,soldPrice:v}))} type=“number” placeholder=“0” />
+<Input label=“Prix d’achat (€)” value={form.buyPrice} onChange={v => setForm(p=>({. . .p,buyPrice:v}))} type=“number” placeholder=“0” />
+<Input label=“Date” value={form.date} onChange={v => setForm(p=>({. . .p,date:v}))} type=“date” />
+<Input label=“Nombre de personnes” value={form.partners} onChange={v => setForm(p=>({. . .p,partners:v}))} type=“number” placeholder={`${partnerCount} (défaut)`} />
 {form.soldPrice && form.buyPrice && (
 <div style={{ background: PASTEL.rosePale, borderRadius: 12, padding: “10px 14px”, marginBottom: 14, fontSize: 13 }}>
 💸 Bénéfice : <strong style={{ color: PASTEL.roseDeep }}>{(parseFloat(form.soldPrice||0)-parseFloat(form.buyPrice||0)).toFixed(2)}€</strong>
@@ -304,7 +304,7 @@ supabase.from(“stock”).select(”*”).eq(“user_id”, userId).order(“cr
 const handleAdd = async () => {
 if (!form.article) return;
 const { data } = await supabase.from(“stock”).insert({ user_id: userId, article: form.article, buy_price: parseFloat(form.buyPrice)||0, target_price: parseFloat(form.targetPrice)||0, note: form.note }).select().single();
-if (data) setStock(p => [data, …p]);
+if (data) setStock(p => [data, . . .p]);
 setModal(false);
 setForm({ article: “”, buyPrice: “”, targetPrice: “”, note: “” });
 };
@@ -324,7 +324,7 @@ return (
 </div>
 <PinkButton onClick={() => setModal(true)} small>+ Ajouter au stock</PinkButton>
 </div>
-{loading && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight }}>Chargement… 🌸</div>}
+{loading && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight }}>Chargement. . . 🌸</div>}
 {!loading && stock.length === 0 && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight, fontSize: 13 }}>🌷 Ton stock est vide !</div>}
 <div style={{ display: “flex”, flexDirection: “column”, gap: 10 }}>
 {stock.map(s => (
@@ -343,10 +343,10 @@ return (
 </div>
 {modal && (
 <Modal title=“📦 Ajouter au stock” onClose={() => setModal(false)}>
-<Input label=“Article” value={form.article} onChange={v => setForm(p=>({…p,article:v}))} placeholder=“ex: Veste Zara” />
-<Input label=“Prix d’achat (€)” value={form.buyPrice} onChange={v => setForm(p=>({…p,buyPrice:v}))} type=“number” placeholder=“0” />
-<Input label=“Prix de vente cible (€)” value={form.targetPrice} onChange={v => setForm(p=>({…p,targetPrice:v}))} type=“number” placeholder=“0” />
-<Input label=“Note (optionnel)” value={form.note} onChange={v => setForm(p=>({…p,note:v}))} placeholder=“ex: vendu sur Vinted” />
+<Input label=“Article” value={form.article} onChange={v => setForm(p=>({. . .p,article:v}))} placeholder=“ex: Veste Zara” />
+<Input label=“Prix d’achat (€)” value={form.buyPrice} onChange={v => setForm(p=>({. . .p,buyPrice:v}))} type=“number” placeholder=“0” />
+<Input label=“Prix de vente cible (€)” value={form.targetPrice} onChange={v => setForm(p=>({. . .p,targetPrice:v}))} type=“number” placeholder=“0” />
+<Input label=“Note (optionnel)” value={form.note} onChange={v => setForm(p=>({. . .p,note:v}))} placeholder=“ex: vendu sur Vinted” />
 <PinkButton onClick={handleAdd}>Ajouter 🌸</PinkButton>
 </Modal>
 )}
@@ -369,7 +369,7 @@ supabase.from(“expenses”).select(”*”).eq(“user_id”, userId).order(�
 const handleAdd = async () => {
 if (!form.label || !form.amount) return;
 const { data } = await supabase.from(“expenses”).insert({ user_id: userId, label: form.label, amount: parseFloat(form.amount), category: form.category, date: form.date }).select().single();
-if (data) setExpenses(p => [data, …p]);
+if (data) setExpenses(p => [data, . . .p]);
 setModal(false);
 setForm({ label: “”, amount: “”, category: “Achats”, date: new Date().toISOString().slice(0,10) });
 };
@@ -394,7 +394,7 @@ return (
 <h3 style={{ margin: 0, fontFamily: “‘Playfair Display’, serif”, color: PASTEL.roseDeep, fontSize: 16 }}>Mes dépenses</h3>
 <PinkButton onClick={() => setModal(true)} small>+ Ajouter</PinkButton>
 </div>
-{loading && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight }}>Chargement… 🌸</div>}
+{loading && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight }}>Chargement. . . 🌸</div>}
 {!loading && expenses.length === 0 && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight, fontSize: 13 }}>🎀 Aucune dépense enregistrée !</div>}
 <div style={{ display: “flex”, flexDirection: “column”, gap: 8 }}>
 {expenses.map(e => (
@@ -409,15 +409,15 @@ return (
 </div>
 {modal && (
 <Modal title=“💸 Nouvelle dépense” onClose={() => setModal(false)}>
-<Input label=“Description” value={form.label} onChange={v => setForm(p=>({…p,label:v}))} placeholder=“ex: Achat sac Longchamp” />
-<Input label=“Montant (€)” value={form.amount} onChange={v => setForm(p=>({…p,amount:v}))} type=“number” placeholder=“0” />
+<Input label=“Description” value={form.label} onChange={v => setForm(p=>({. . .p,label:v}))} placeholder=“ex: Achat sac Longchamp” />
+<Input label=“Montant (€)” value={form.amount} onChange={v => setForm(p=>({. . .p,amount:v}))} type=“number” placeholder=“0” />
 <div style={{ marginBottom: 14 }}>
 <label style={{ fontSize: 12, color: PASTEL.textLight, fontFamily: “‘Playfair Display’, serif”, fontWeight: 600, display: “block”, marginBottom: 4 }}>Catégorie</label>
-<select value={form.category} onChange={e => setForm(p=>({…p,category:e.target.value}))} style={{ width: “100%”, padding: “10px 14px”, borderRadius: 12, border: `1.5px solid ${PASTEL.lilac}`, background: PASTEL.cream, color: PASTEL.text, fontFamily: “inherit”, fontSize: 14, outline: “none”, boxSizing: “border-box” }}>
+<select value={form.category} onChange={e => setForm(p=>({. . .p,category:e.target.value}))} style={{ width: “100%”, padding: “10px 14px”, borderRadius: 12, border: `1.5px solid ${PASTEL.lilac}`, background: PASTEL.cream, color: PASTEL.text, fontFamily: “inherit”, fontSize: 14, outline: “none”, boxSizing: “border-box” }}>
 {cats.map(c => <option key={c}>{c}</option>)}
 </select>
 </div>
-<Input label=“Date” value={form.date} onChange={v => setForm(p=>({…p,date:v}))} type=“date” />
+<Input label=“Date” value={form.date} onChange={v => setForm(p=>({. . .p,date:v}))} type=“date” />
 <PinkButton onClick={handleAdd}>Enregistrer ✨</PinkButton>
 </Modal>
 )}
@@ -442,7 +442,7 @@ supabase.from(“projects”).select(”*”).eq(“user_id”, userId).order(�
 const handleAdd = async () => {
 if (!form.name || !form.goal) return;
 const { data } = await supabase.from(“projects”).insert({ user_id: userId, name: form.name, goal: parseFloat(form.goal), saved: parseFloat(form.saved)||0, emoji: form.emoji }).select().single();
-if (data) setProjects(p => [data, …p]);
+if (data) setProjects(p => [data, . . .p]);
 setModal(false);
 setForm({ name: “”, goal: “”, saved: “”, emoji: “🎯” });
 };
@@ -450,7 +450,7 @@ setForm({ name: “”, goal: “”, saved: “”, emoji: “🎯” });
 const handleAddMoney = async (p) => {
 const newSaved = Math.min(p.saved + parseFloat(addAmt||0), p.goal);
 await supabase.from(“projects”).update({ saved: newSaved }).eq(“id”, p.id);
-setProjects(prev => prev.map(x => x.id === p.id ? { …x, saved: newSaved } : x));
+setProjects(prev => prev.map(x => x.id === p.id ? { . . .x, saved: newSaved } : x));
 if (newSaved >= p.goal) triggerSticker();
 setAddingId(null); setAddAmt(””);
 };
@@ -464,7 +464,7 @@ return (
 </div>
 <PinkButton onClick={() => setModal(true)} small>+ Nouveau projet</PinkButton>
 </div>
-{loading && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight }}>Chargement… 🌸</div>}
+{loading && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight }}>Chargement. . . 🌸</div>}
 {!loading && projects.length === 0 && <div style={{ textAlign: “center”, padding: 32, color: PASTEL.textLight, fontSize: 13 }}>🌟 Aucun projet. Rêve grand !</div>}
 <div style={{ display: “flex”, flexDirection: “column”, gap: 14 }}>
 {projects.map(p => {
@@ -502,13 +502,13 @@ return (
 </div>
 {modal && (
 <Modal title=“🌟 Nouveau projet” onClose={() => setModal(false)}>
-<Input label=“Nom du projet” value={form.name} onChange={v => setForm(p=>({…p,name:v}))} placeholder=“ex: Acheter une voiture” />
-<Input label=“Objectif (€)” value={form.goal} onChange={v => setForm(p=>({…p,goal:v}))} type=“number” placeholder=“5000” />
-<Input label=“Déjà économisé (€)” value={form.saved} onChange={v => setForm(p=>({…p,saved:v}))} type=“number” placeholder=“0” />
+<Input label=“Nom du projet” value={form.name} onChange={v => setForm(p=>({. . .p,name:v}))} placeholder=“ex: Acheter une voiture” />
+<Input label=“Objectif (€)” value={form.goal} onChange={v => setForm(p=>({. . .p,goal:v}))} type=“number” placeholder=“5000” />
+<Input label=“Déjà économisé (€)” value={form.saved} onChange={v => setForm(p=>({. . .p,saved:v}))} type=“number” placeholder=“0” />
 <div style={{ marginBottom: 14 }}>
 <label style={{ fontSize: 12, color: PASTEL.textLight, fontFamily: “‘Playfair Display’, serif”, fontWeight: 600, display: “block”, marginBottom: 6 }}>Emoji</label>
 <div style={{ display: “flex”, gap: 8, flexWrap: “wrap” }}>
-{emojis.map(e => <button key={e} onClick={() => setForm(p=>({…p,emoji:e}))} style={{ fontSize: 20, background: form.emoji===e ? PASTEL.rosePale : “transparent”, border: form.emoji===e ? `2px solid ${PASTEL.roseDark}` : “2px solid transparent”, borderRadius: 10, padding: “4px 8px”, cursor: “pointer” }}>{e}</button>)}
+{emojis.map(e => <button key={e} onClick={() => setForm(p=>({. . .p,emoji:e}))} style={{ fontSize: 20, background: form.emoji===e ? PASTEL.rosePale : “transparent”, border: form.emoji===e ? `2px solid ${PASTEL.roseDark}` : “2px solid transparent”, borderRadius: 10, padding: “4px 8px”, cursor: “pointer” }}>{e}</button>)}
 </div>
 </div>
 <PinkButton onClick={handleAdd}>Créer le projet 💫</PinkButton>
